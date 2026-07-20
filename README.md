@@ -645,4 +645,6 @@ Before using the project outside local development:
 
 ## 📄 License
 
-No license file is currently included. Add a license before publishing or distributing this repository.
+This project is licensed under the **GNU General Public License v3.0 or later**.
+
+See [LICENSE](LICENSE) for the full license text.
