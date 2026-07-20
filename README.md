@@ -111,55 +111,107 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 
 ### 🔐 Login
 
-![CAPYHELP login screen](docs/screenshots/login.png)
+<p align="center">
+  <a href="docs/screenshots/login.png">
+    <img src="docs/screenshots/login.png" width="360" alt="CAPYHELP login screen">
+  </a>
+</p>
 
 ### 🎫 Ticket Dashboard
 
-![Ticket dashboard](docs/screenshots/dashboard.png)
+<p align="center">
+  <a href="docs/screenshots/dashboard.png">
+    <img src="docs/screenshots/dashboard.png" width="900" alt="Ticket dashboard">
+  </a>
+</p>
 
 ### 💬 Ticket Conversation with AI Summary
 
-![Ticket conversation](docs/screenshots/ticket_chat.png)
+<p align="center">
+  <a href="docs/screenshots/ticket_chat.png">
+    <img src="docs/screenshots/ticket_chat.png" width="900" alt="Ticket conversation">
+  </a>
+</p>
 
 ### 📝 Public Customer Ticket Form
 
-![Customer ticket form](docs/screenshots/ticket_form.png)
+<p align="center">
+  <a href="docs/screenshots/ticket_form.png">
+    <img src="docs/screenshots/ticket_form.png" width="760" alt="Customer ticket form">
+  </a>
+</p>
 
 ### 📘 Knowledge Base
 
-![Knowledge base](docs/screenshots/base.png)
+<p align="center">
+  <a href="docs/screenshots/base.png">
+    <img src="docs/screenshots/base.png" width="900" alt="Knowledge base">
+  </a>
+</p>
 
 ### 🔔 Notifications
 
-![Notifications dropdown](docs/screenshots/notifications.png)
+<p align="center">
+  <a href="docs/screenshots/notifications.png">
+    <img src="docs/screenshots/notifications.png" width="320" alt="Notifications dropdown">
+  </a>
+</p>
 
 ### 📈 Reports
 
-![Reports dashboard](docs/screenshots/reports.png)
+<p align="center">
+  <a href="docs/screenshots/reports.png">
+    <img src="docs/screenshots/reports.png" width="900" alt="Reports dashboard">
+  </a>
+</p>
 
 ### 📄 PDF Report
 
-![Generated PDF report](docs/screenshots/report_in_pdf.png)
+<p align="center">
+  <a href="docs/screenshots/report_in_pdf.png">
+    <img src="docs/screenshots/report_in_pdf.png" width="420" alt="Generated PDF report">
+  </a>
+</p>
 
 ### 👥 Team Directory
 
-![Team directory](docs/screenshots/team.png)
+<p align="center">
+  <a href="docs/screenshots/team.png">
+    <img src="docs/screenshots/team.png" width="900" alt="Team directory">
+  </a>
+</p>
 
 ### 🧑‍💼 Admin User Management
 
-![Admin user CRUD](docs/screenshots/crud_agents.png)
+<p align="center">
+  <a href="docs/screenshots/crud_agents.png">
+    <img src="docs/screenshots/crud_agents.png" width="860" alt="Admin user CRUD">
+  </a>
+</p>
 
 ### ⚙️ Admin Settings
 
-![Admin settings](docs/screenshots/settings_admin.png)
+<p align="center">
+  <a href="docs/screenshots/settings_admin.png">
+    <img src="docs/screenshots/settings_admin.png" width="900" alt="Admin settings">
+  </a>
+</p>
 
 ### 🧩 Agent Settings
 
-![Agent settings](docs/screenshots/settings_user.png)
+<p align="center">
+  <a href="docs/screenshots/settings_user.png">
+    <img src="docs/screenshots/settings_user.png" width="900" alt="Agent settings">
+  </a>
+</p>
 
 ### 🐳 Docker Stack
 
-![Docker services](docs/screenshots/docker.png)
+<p align="center">
+  <a href="docs/screenshots/docker.png">
+    <img src="docs/screenshots/docker.png" width="860" alt="Docker services">
+  </a>
+</p>
 
 <a id="architecture"></a>
 
