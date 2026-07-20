@@ -1,4 +1,4 @@
-# CAPYHELP - AI Helpdesk Platform
+# CAPYHELP - AI Helpdesk Platform 🎧
 
 <p align="center">
   <img src="public/images/capyhelp-smaller.png" width="180" alt="CAPYHELP logo">
@@ -18,7 +18,7 @@
 
 The project was built as a full-stack support system using Laravel, Inertia, Vue, Tailwind CSS, Laravel Reverb, MySQL, Mailpit, ClamAV, and Ollama. It is designed to run locally with Docker Compose and provide a realistic helpdesk workflow out of the box.
 
-## Table of Contents
+## 📚 Table of Contents
 
 - [Features](#features)
 - [Technology Stack](#technology-stack)
@@ -31,7 +31,6 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - [AMD GPU Mode](#amd-gpu-mode)
 - [ClamAV Antivirus](#clamav-antivirus)
 - [Mailpit Email Testing](#mailpit-email-testing)
-- [OAuth Login](#oauth-login)
 - [Localization](#localization)
 - [Testing](#testing)
 - [Useful Commands](#useful-commands)
@@ -39,7 +38,9 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - [What I Learned](#what-i-learned)
 - [Future Improvements](#future-improvements)
 
-## Features
+<a id="features"></a>
+
+## ✨ Features
 
 - **Ticket dashboard** with filters, status counters, assignment, priority, channel, and pagination.
 - **Customer ticket form** available without an account at `/support`.
@@ -60,18 +61,18 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - **Knowledge base** with problem symptoms, solution steps, tags, and ready customer replies.
 - **AI tone rewrite** for support replies using local Ollama models.
 - **AI ticket summary** for closed or resolved tickets.
-- **Google and Facebook OAuth** via Laravel Socialite.
 - **Multi-language interface**: English, Polish, Chinese, French, German, Italian, and Russian.
 - **Light and dark themes** stored in user settings.
 - **Mobile-friendly UI** for the main support workflows.
 
-## Technology Stack
+<a id="technology-stack"></a>
 
-### Backend
+## 🛠️ Technology Stack
+
+### ⚙️ Backend
 
 - PHP 8.3
 - Laravel 13
-- Laravel Socialite
 - Laravel Reverb
 - Laravel Queues and Scheduler
 - MySQL 8.4
@@ -79,7 +80,7 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - ClamAV integration through a custom `ClamAvScanner` service
 - Ollama HTTP API integration for local LLM features
 
-### Frontend
+### 🎨 Frontend
 
 - Vue 3
 - Inertia.js
@@ -90,7 +91,7 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - Vue 3 Emoji Picker
 - Font Awesome icons
 
-### Infrastructure
+### 🐳 Infrastructure
 
 - Docker Compose
 - Nginx
@@ -104,61 +105,65 @@ The project was built as a full-stack support system using Laravel, Inertia, Vue
 - Ollama
 - ClamAV
 
-## Screenshots
+<a id="screenshots"></a>
 
-### Login
+## 📊 Screenshots
+
+### 🔐 Login
 
 ![CAPYHELP login screen](docs/screenshots/login.png)
 
-### Ticket Dashboard
+### 🎫 Ticket Dashboard
 
 ![Ticket dashboard](docs/screenshots/dashboard.png)
 
-### Ticket Conversation with AI Summary
+### 💬 Ticket Conversation with AI Summary
 
 ![Ticket conversation](docs/screenshots/ticket_chat.png)
 
-### Public Customer Ticket Form
+### 📝 Public Customer Ticket Form
 
 ![Customer ticket form](docs/screenshots/ticket_form.png)
 
-### Knowledge Base
+### 📘 Knowledge Base
 
 ![Knowledge base](docs/screenshots/base.png)
 
-### Notifications
+### 🔔 Notifications
 
 ![Notifications dropdown](docs/screenshots/notifications.png)
 
-### Reports
+### 📈 Reports
 
 ![Reports dashboard](docs/screenshots/reports.png)
 
-### PDF Report
+### 📄 PDF Report
 
 ![Generated PDF report](docs/screenshots/report_in_pdf.png)
 
-### Team Directory
+### 👥 Team Directory
 
 ![Team directory](docs/screenshots/team.png)
 
-### Admin User Management
+### 🧑‍💼 Admin User Management
 
 ![Admin user CRUD](docs/screenshots/crud_agents.png)
 
-### Admin Settings
+### ⚙️ Admin Settings
 
 ![Admin settings](docs/screenshots/settings_admin.png)
 
-### Agent Settings
+### 🧩 Agent Settings
 
 ![Agent settings](docs/screenshots/settings_user.png)
 
-### Docker Stack
+### 🐳 Docker Stack
 
 ![Docker services](docs/screenshots/docker.png)
 
-## Architecture
+<a id="architecture"></a>
+
+## 🏗️ Architecture
 
 CAPYHELP is split into several focused services:
 
@@ -175,9 +180,11 @@ CAPYHELP is split into several focused services:
 | Ollama | Runs local LLM models for AI tone rewriting and summaries |
 | Nginx | Serves the public application and static assets |
 
-## Quick Start
+<a id="quick-start"></a>
 
-### Requirements
+## 🚀 Quick Start
+
+### ✅ Requirements
 
 - Docker Engine or Docker Desktop
 - Docker Compose v2
@@ -227,7 +234,9 @@ docker compose exec ollama ollama pull llama3.2:3b
 
 No external mail server, database server, antivirus server, or LLM API key is required for the local stack.
 
-## Default Accounts
+<a id="default-accounts"></a>
+
+## 🔑 Default Accounts
 
 Seeded accounts use the same password:
 
@@ -244,7 +253,9 @@ password
 | Agent | `aleksander@helpdesk.test` | Demo support agent |
 | Agent | `agata@helpdesk.test` | Demo support agent |
 
-## Docker Services
+<a id="docker-services"></a>
+
+## 🐳 Docker Services
 
 | Service | URL / Port | Notes |
 | --- | --- | --- |
@@ -269,7 +280,9 @@ Password: root
 Database: helpdesk
 ```
 
-## Ollama AI
+<a id="ollama-ai"></a>
+
+## 🤖 Ollama AI
 
 CAPYHELP uses Ollama for two local AI workflows:
 
@@ -309,7 +322,9 @@ docker compose exec ollama ollama pull llama3.2:3b
 docker compose exec ollama ollama run llama3.2:3b
 ```
 
-## AMD GPU Mode
+<a id="amd-gpu-mode"></a>
+
+## ⚡ AMD GPU Mode
 
 The base `docker-compose.yml` runs Ollama on CPU so the project starts on most machines.
 
@@ -337,7 +352,9 @@ ls -l /dev/kfd /dev/dri
 
 If those devices are missing, use the CPU stack or install the required AMD/ROCm drivers.
 
-## ClamAV Antivirus
+<a id="clamav-antivirus"></a>
+
+## 🛡️ ClamAV Antivirus
 
 Uploaded files are scanned through ClamAV before they are accepted.
 
@@ -360,7 +377,9 @@ X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
 
 Save that text as `eicar.txt` and try to upload it as a ticket attachment. The application should reject it.
 
-## Mailpit Email Testing
+<a id="mailpit-email-testing"></a>
+
+## 📬 Mailpit Email Testing
 
 All development emails are sent to Mailpit instead of real inboxes.
 
@@ -384,35 +403,9 @@ The following notifications are delivered through the queue:
 - Weekly report notification
 - Customer ticket created notification
 
-## OAuth Login
+<a id="localization"></a>
 
-Google and Facebook login are implemented with Laravel Socialite.
-
-Set provider credentials in `.env` or in Docker Compose environment variables:
-
-```env
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GOOGLE_REDIRECT_URI=http://localhost:8010/auth/google/callback
-
-FACEBOOK_CLIENT_ID=
-FACEBOOK_CLIENT_SECRET=
-FACEBOOK_REDIRECT_URI=http://localhost:8010/auth/facebook/callback
-
-SOCIAL_AUTH_ALLOWED_DOMAINS=example.com,company.com
-SOCIAL_AUTH_ALLOWED_EMAILS=user@example.com
-```
-
-Callback URLs must match the provider console exactly:
-
-```text
-http://localhost:8010/auth/google/callback
-http://localhost:8010/auth/facebook/callback
-```
-
-Security note: new social users are created only when their email address matches `SOCIAL_AUTH_ALLOWED_DOMAINS` or `SOCIAL_AUTH_ALLOWED_EMAILS`.
-
-## Localization
+## 🌍 Localization
 
 The interface supports:
 
@@ -441,7 +434,9 @@ config/locales.php
 
 The selected language is persisted for authenticated users through the `locale` column on the `users` table.
 
-## Testing
+<a id="testing"></a>
+
+## 🧪 Testing
 
 The feature test suite covers access control, tickets, messages, team chat, customer tickets, PDF reports, scheduled notifications, account settings, social auth, localization, and AI behavior.
 
@@ -468,7 +463,9 @@ tests/Feature/LocalizationTest.php
 tests/Feature/TicketAiTest.php
 ```
 
-## Useful Commands
+<a id="useful-commands"></a>
+
+## 💻 Useful Commands
 
 Start the stack:
 
@@ -528,7 +525,9 @@ docker compose down -v
 
 Warning: `docker compose down -v` deletes local MySQL, Ollama, ClamAV, and uploaded-file volumes.
 
-## Project Structure
+<a id="project-structure"></a>
+
+## 🗂️ Project Structure
 
 ```text
 app/
@@ -562,7 +561,9 @@ tests/
   Unit/                       Unit tests
 ```
 
-## Main Routes
+<a id="main-routes"></a>
+
+## 🧭 Main Routes
 
 | Area | Route |
 | --- | --- |
@@ -578,7 +579,9 @@ tests/
 | Public support form | `/support` |
 | Customer ticket link | `/support/tickets/{ticket}` |
 
-## Data Model Overview
+<a id="data-model-overview"></a>
+
+## 🗄️ Data Model Overview
 
 Main database tables:
 
@@ -595,7 +598,9 @@ Main database tables:
 - `cache`
 - `sessions`
 
-## Production Notes
+<a id="production-notes"></a>
+
+## 🚢 Production Notes
 
 Before using the project outside local development:
 
@@ -604,13 +609,14 @@ Before using the project outside local development:
 - Move secrets out of `docker-compose.yml`.
 - Use a real SMTP provider instead of Mailpit.
 - Use TLS for HTTP and WebSocket traffic.
-- Restrict OAuth domains and callback URLs.
 - Use durable object storage for attachments if needed.
 - Review file size limits and retention rules.
 - Use queue workers managed by Supervisor or an equivalent process manager.
 - Replace local Docker credentials with production-grade secrets.
 
-## What I Learned
+<a id="what-i-learned"></a>
+
+## 💡 What I Learned
 
 - Building a Laravel + Inertia application as a cohesive SPA-like product without separating backend and frontend repositories.
 - Using Laravel Reverb and Echo for real-time conversations and notification updates.
@@ -622,7 +628,9 @@ Before using the project outside local development:
 - Preparing a Docker Compose stack with multiple cooperating services.
 - Designing multilingual Vue UI state with persisted user locale.
 
-## Future Improvements
+<a id="future-improvements"></a>
+
+## 🚀 Future Improvements
 
 - Add a CI pipeline for PHP tests, frontend build, and code style checks.
 - Move frontend asset compilation into a multi-stage Docker build for a fully Docker-only build.
@@ -633,6 +641,8 @@ Before using the project outside local development:
 - Add object storage support for attachments.
 - Add production deployment manifests.
 
-## License
+<a id="license"></a>
+
+## 📄 License
 
 No license file is currently included. Add a license before publishing or distributing this repository.
