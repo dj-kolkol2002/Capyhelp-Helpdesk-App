@@ -1,0 +1,11 @@
+services:
+  app:
+    environment:
+      OLLAMA_MODEL: mistral-small:24b
+      OLLAMA_FALLBACK_MODEL: llama3.2:3b
+
+  ollama:
+    image: ollama/ollama:rocm
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri

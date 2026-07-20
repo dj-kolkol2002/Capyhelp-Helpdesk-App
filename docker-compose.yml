@@ -1,0 +1,253 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www/html
+    environment:
+      APP_ENV: local
+      APP_TIMEZONE: Europe/Warsaw
+      APP_KEY: base64:B6vskV+8rJ3y2vF8y21Il5T1q8i0+W7yxyAuP2G7YNs=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8010
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: helpdesk
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      BROADCAST_CONNECTION: reverb
+      REVERB_APP_ID: 912363
+      REVERB_APP_KEY: sa3zyfkj4aa3aawzj8ja
+      REVERB_APP_SECRET: wm62b7qkpe2gapu1fkad
+      REVERB_HOST: reverb
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_FROM_ADDRESS: helpdesk@example.com
+      MAIL_FROM_NAME: Helpdesk System
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI:-http://localhost:8010/auth/google/callback}
+      FACEBOOK_CLIENT_ID: ${FACEBOOK_CLIENT_ID:-}
+      FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET:-}
+      FACEBOOK_REDIRECT_URI: ${FACEBOOK_REDIRECT_URI:-http://localhost:8010/auth/facebook/callback}
+      SOCIAL_AUTH_ALLOWED_DOMAINS: ${SOCIAL_AUTH_ALLOWED_DOMAINS:-}
+      SOCIAL_AUTH_ALLOWED_EMAILS: ${SOCIAL_AUTH_ALLOWED_EMAILS:-}
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_MODEL: llama3.2:3b
+      OLLAMA_FALLBACK_MODEL: llama3.2:3b
+      OLLAMA_TIMEOUT: 180
+      OLLAMA_TEMPERATURE: 0.0
+      OLLAMA_TOP_P: 0.2
+      OLLAMA_TOP_K: 10
+      OLLAMA_REPEAT_PENALTY: 1.2
+      OLLAMA_NUM_CTX: 2048
+      OLLAMA_NUM_PREDICT: 450
+      OLLAMA_SEED: 42
+      CLAMAV_ENABLED: "true"
+      CLAMAV_HOST: clamav
+      CLAMAV_PORT: 3310
+      CLAMAV_TIMEOUT: 30
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+      ollama:
+        condition: service_started
+      clamav:
+        condition: service_healthy
+    volumes:
+      - public-storage:/var/www/html/storage/app/public
+      - private-storage:/var/www/html/storage/app/private
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8010:80"
+    volumes:
+      - public-storage:/var/www/html/public/storage:ro
+    depends_on:
+      - app
+
+  reverb:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www/html
+    command: php artisan reverb:start --host=0.0.0.0 --port=8080
+    ports:
+      - "8082:8080"
+    environment:
+      APP_ENV: local
+      APP_TIMEZONE: Europe/Warsaw
+      APP_KEY: base64:B6vskV+8rJ3y2vF8y21Il5T1q8i0+W7yxyAuP2G7YNs=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8010
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: helpdesk
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      BROADCAST_CONNECTION: reverb
+      REVERB_APP_ID: 912363
+      REVERB_APP_KEY: sa3zyfkj4aa3aawzj8ja
+      REVERB_APP_SECRET: wm62b7qkpe2gapu1fkad
+      REVERB_HOST: reverb
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_FROM_ADDRESS: helpdesk@example.com
+      MAIL_FROM_NAME: Helpdesk System
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  queue:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www/html
+    command: php artisan queue:listen --tries=1 --timeout=0
+    environment:
+      APP_ENV: local
+      APP_TIMEZONE: Europe/Warsaw
+      APP_KEY: base64:B6vskV+8rJ3y2vF8y21Il5T1q8i0+W7yxyAuP2G7YNs=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8010
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: helpdesk
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      BROADCAST_CONNECTION: reverb
+      REVERB_APP_ID: 912363
+      REVERB_APP_KEY: sa3zyfkj4aa3aawzj8ja
+      REVERB_APP_SECRET: wm62b7qkpe2gapu1fkad
+      REVERB_HOST: reverb
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_FROM_ADDRESS: helpdesk@example.com
+      MAIL_FROM_NAME: Helpdesk System
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    working_dir: /var/www/html
+    command: php artisan schedule:work
+    environment:
+      APP_ENV: local
+      APP_TIMEZONE: Europe/Warsaw
+      APP_KEY: base64:B6vskV+8rJ3y2vF8y21Il5T1q8i0+W7yxyAuP2G7YNs=
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8010
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: helpdesk
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      BROADCAST_CONNECTION: reverb
+      REVERB_APP_ID: 912363
+      REVERB_APP_KEY: sa3zyfkj4aa3aawzj8ja
+      REVERB_APP_SECRET: wm62b7qkpe2gapu1fkad
+      REVERB_HOST: reverb
+      REVERB_PORT: 8080
+      REVERB_SCHEME: http
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      MAIL_FROM_ADDRESS: helpdesk@example.com
+      MAIL_FROM_NAME: Helpdesk System
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: helpdesk
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  clamav:
+    image: clamav/clamav:stable
+    restart: unless-stopped
+    volumes:
+      - clamav-data:/var/lib/clamav
+    healthcheck:
+      test: ["CMD-SHELL", "clamdscan --version >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+
+volumes:
+  mysql-data:
+  public-storage:
+  private-storage:
+  ollama-data:
+  clamav-data:
